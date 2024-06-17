@@ -1,27 +1,40 @@
-﻿// Animal.cs
-public class Animal
+﻿// Shape.cs
+public abstract class Shape
 {
-    public virtual void MakeSound()
+    public abstract double GetArea();
+}
+
+// Circle.cs
+public class Circle : Shape
+{
+    private double radius;
+
+    public Circle(double radius)
     {
-        Console.WriteLine("Some generic sound");
+        this.radius = radius;
+    }
+
+    public override double GetArea()
+    {
+        return Math.PI * radius * radius;
     }
 }
 
-// Dog.cs
-public class Dog : Animal
+// Rectangle.cs
+public class Rectangle : Shape
 {
-    public override void MakeSound()
-    {
-        Console.WriteLine("Bark");
-    }
-}
+    private double width;
+    private double height;
 
-// Cat.cs
-public class Cat : Animal
-{
-    public override void MakeSound()
+    public Rectangle(double width, double height)
     {
-        Console.WriteLine("Meow");
+        this.width = width;
+        this.height = height;
+    }
+
+    public override double GetArea()
+    {
+        return width * height;
     }
 }
 
@@ -30,13 +43,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        Animal animal = new Animal();
-        animal.MakeSound(); // Output: Some generic sound
+        Circle circle = new Circle(5);
+        Console.WriteLine($"Circle area: {circle.GetArea()}"); // Output: Circle area: 78.53981633974483
 
-        Dog dog = new Dog();
-        dog.MakeSound(); // Output: Bark
-
-        Cat cat = new Cat();
-        cat.MakeSound(); // Output: Meow
+        Rectangle rectangle = new Rectangle(10, 5);
+        Console.WriteLine($"Rectangle area: {rectangle.GetArea()}"); // Output: Rectangle area: 50
     }
 }
